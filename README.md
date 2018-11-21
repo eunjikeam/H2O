@@ -102,8 +102,8 @@ summary(pred)
 ### 3.1 Importing & uploading Files
 
 `h2o.importFile` function : h2o.importFile(path = path, destination_frame = name)  
-    * `path` : data 경로  
-    * `destination_frame` : R에서 사용될 데이터 이름  
+ * `path` : data 경로  
+ * `destination_frame` : R에서 사용될 데이터 이름  
     
 ```
 irisPath <- system.file("extdata", "iris.csv", package = "h2o")  # irisfile의 경로 지정
@@ -117,8 +117,8 @@ summary(iris.hex)
 
 H2O cluster에 파일 업로드  
 `h2o.uploadFile` function : h2o.uploadFile(path = path, destination_frame = name)  
-    * `path` : 내보낼 파일 경로  
-    * `destination_frame` : 내보낼 파일이름.확장자  
+ * `path` : 내보낼 파일 경로  
+ * `destination_frame` : 내보낼 파일이름.확장자  
 
 ```
 irisPath <- system.file("extdata", "iris.csv", package = "h2o")  # irisfile의 경로 지정
@@ -132,10 +132,10 @@ iris.hex <- h2o.uploadFile(path = irisPath, destination_frame = "iris.hex") # �
 범주형인 변수를 찾거나 변환하기  
 
 `h2o.anyFactor` function : h2o.anyfunction(data)  
-    * data 안에 factor인 변수가 있는지 확인하는 함수  
+ * data 안에 factor인 변수가 있는지 확인하는 함수  
     
 `as.factor` function : as.factor(vector)  
-    * 벡터인 변수를 factor형으로 바꾸는 함수  
+ * 벡터인 변수를 factor형으로 바꾸는 함수  
     
 ```
 irisPath <- system.file("extdata", "iris_wheader.csv", package = "h2o")
@@ -158,7 +158,7 @@ summary(prostate.hex[,4])            # 변수가 factor가 되어서 factor별�
 
 Data Frame을 가공하거나 변환하기  
 `as.h2o` function : as.h2o(data, destination_frame = name.hex)  
-    * `destination_frame` : h2o에 맞는 데이터 프레임 hex로 만든다.  
+ * `destination_frame` : h2o에 맞는 데이터 프레임 hex로 만든다.  
 ``` 
 prosPath <- system.file("extdata", "prostate.csv", package = "h2o")
 prostate.hex <- h2o.importFile(path = prosPath, destination_frame = "prostate.hex")
@@ -188,11 +188,11 @@ h2o.table(prostate.hex[,c("AGE","RACE")])   # data의 변수에 따른 count를 
 훈련데이터랑 테스트 데이터를 나누는 방법은 두가지가 있다.
 
 `h2o.runif` function : h2o.runif(data)  
-    * 데이터에서 uniform 분포에 따라 random number 추출  
+ * 데이터에서 uniform 분포에 따라 random number 추출  
 
 `h2o.splitFrame` function : h2o.splitFrame(data, ratios = rate)  
-    * `data` : 쪼갤 data 입력  
-    * `ratios` : 얼만큼의 비율로 쪼갤건지 설정. 벡터를 이용해 여러개로 쪼갤 수 도 있음  
+ * `data` : 쪼갤 data 입력  
+ * `ratios` : 얼만큼의 비율로 쪼갤건지 설정. 벡터를 이용해 여러개로 쪼갤 수 도 있음  
 
 ```
 ### 1. h2o.runif()를 이용한 training set, test set 만들기
@@ -243,15 +243,15 @@ h2o.removeAll()                      # cluster에 있는 모든 데이터 제거
 GBM은 앙상블 러닝에서 모형을 향상시켜주는데 사용된다.   
 `h2o.gbm` function : h2o.gbm(y, x, training_frame, ntrees, max_depth, min_rows,     
                              learn_rate, distribution)  
-    * `y` : 종속변수   
-    * `x` : 독립변수  
-    * `training_frame` : 훈련데이터  
-    * `ntrees` : 나무의 가지수. default는 50  
-    * `max_depth` : 나무의 최대 높이. default는 5  
-    * `min_rows` : leaf node에 주는 가중치의 최소값 default는 10  
-    * `learn_rate` : learning rate. default는 0.1  
-    * `distribution` : 분포 결정.  
-    * 이 밖에도 여러가지 option이 있음.  
+  * `y` : 종속변수   
+  * `x` : 독립변수  
+  * `training_frame` : 훈련데이터  
+  * `ntrees` : 나무의 가지수. default는 50  
+  * `max_depth` : 나무의 최대 높이. default는 5  
+  * `min_rows` : leaf node에 주는 가중치의 최소값 default는 10  
+  * `learn_rate` : learning rate. default는 0.1  
+  * `distribution` : 분포 결정.  
+  * 이 밖에도 여러가지 option이 있음.  
 
 Model detail, training data의 MSE, Scoring History, 등을 알 수 있다.  
  
@@ -286,13 +286,13 @@ iris.gbm2@model$training_metrics
 H2O에서는 일반화하는 과정을 elastic net penalty를 사용한다.  
   
 `hlo.gbm` function : h2o.glm(y, x, training_frame, family, nfolds, alpha)  
-    * `y` : 종속변수  
-    * `x` : 독립변수  
-    * `training_frame` : 훈련데이터  
-    * `family` : 종속변수의 분포를 정의  
-    * `nfold` : K-fold 교차검정을 하는 횟수를 정의.  
-    * `alpha` : L1(LASSO)와 L2(Ridge)사이의 값 지정, 1일 경우 L1을 선택, 0일 경우 L2를 선택한다. 그 중간은 Elastic 이라 부른다.  
-    * 이 밖에도 여러가지 option이 있음.  
+ * `y` : 종속변수  
+ * `x` : 독립변수  
+ * `training_frame` : 훈련데이터  
+ * `family` : 종속변수의 분포를 정의  
+ * `nfold` : K-fold 교차검정을 하는 횟수를 정의.  
+ * `alpha` : L1(LASSO)와 L2(Ridge)사이의 값 지정, 1일 경우 L1을 선택, 0일 경우 L2를 선택한다. 그 중간은 Elastic 이라 부른다.  
+ * 이 밖에도 여러가지 option이 있음.  
     
 결과창으로는 MSE, AUC(과적합 판단), R^2(결정계수), Confusion Matrix 등을 보여준다.  
 
@@ -312,9 +312,9 @@ prostate.glm@model$cross_validation_metrics
 ### 4.3 K-means
 
 `h2o.kmeans` function : h2o.kmeans(training_frame, k, x)  
-    * training_frame : 학습할 데이터  
-    * k : k의 개수  
-    * x : 입력될 데이터 변수  
+ * training_frame : 학습할 데이터  
+ * k : k의 개수  
+ * x : 입력될 데이터 변수  
 
 Centroid Statistics 가 출력된다.   
 
@@ -328,9 +328,9 @@ h2o.kmeans(training_frame = iris.hex, k = 3, x = 1:4)
 
 h2o에서는 주성분분석도 지원해준다.  
 `h2o.prcomp` function : h2o.prcomp(training_frame, transform, k)  
-    * `training_frame` : 학습데이터 입력  
-    * `transform` : training data를 어떻게 변환할건지 정의.  
-    * `k` : PCA 주성분의 숫자 지정  
+ * `training_frame` : 학습데이터 입력  
+ * `transform` : training data를 어떻게 변환할건지 정의.  
+ * `k` : PCA 주성분의 숫자 지정  
   
 ```
 ausPath <- system.file("extdata", "australia.csv", package = "h2o")
@@ -344,10 +344,10 @@ australia.pca
 ### 4.5 Predictions
 
 우리가 예측을 할때 확인해야 할 것은 아래와 같다.  
-    * predict : 모델을 돌린 후 나오는 예측값들.  
-    * Confusion Matrix : 알고리즘 후 예측값과 실제값들에 대한 table  
-    * AUC Curve : 민감도와 관련된 Curve로 값이 클 수록 적합하다고 할 수 있음  
-    * PCA Score : 주성분분석을 했을 때 나오는 값으로 보통 0.85 까지 오면 주성분의 개수를 멈춤.  
+ * predict : 모델을 돌린 후 나오는 예측값들.  
+ * Confusion Matrix : 알고리즘 후 예측값과 실제값들에 대한 table  
+ * AUC Curve : 민감도와 관련된 Curve로 값이 클 수록 적합하다고 할 수 있음  
+ * PCA Score : 주성분분석을 했을 때 나오는 값으로 보통 0.85 까지 오면 주성분의 개수를 멈춤.  
     
 ```
 prostate.fit <- h2o.predict(object = prostate.glm, newdata = prostate.hex)
