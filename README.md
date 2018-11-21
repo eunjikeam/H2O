@@ -159,6 +159,7 @@ summary(prostate.hex[,4])            # 변수가 factor가 되어서 factor별�
 Data Frame을 가공하거나 변환하기  
 `as.h2o` function : as.h2o(data, destination_frame = name.hex)  
  * `destination_frame` : h2o에 맞는 데이터 프레임 hex로 만든다.  
+ 
 ``` 
 prosPath <- system.file("extdata", "prostate.csv", package = "h2o")
 prostate.hex <- h2o.importFile(path = prosPath, destination_frame = "prostate.hex")
