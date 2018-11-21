@@ -22,10 +22,10 @@ h2o.removeAll()          # 현재 돌아가고 있는 클러스터가 있다면 
 -------------
 
 아래와 같은 작업 실습  
-    * import a file  
-    * Define significant data  
-    * View data  
-    * Create testing and training sets using sampling  
+ * import a file  
+ * Define significant data  
+ * View data  
+ * Create testing and training sets using sampling  
 
 ```
 airlinesURL = "https://s3.amazonaws.com/h2o-airlines-unpacked/allyears2k.csv"
