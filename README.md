@@ -3,7 +3,7 @@ Machine Learning with R and H2O
 
 <br>
 
-1. h2o Setting, 환경 확인
+## 1. h2o Setting, 환경 확인
 -------------
 
 ```
@@ -18,7 +18,7 @@ h2o.removeAll()          # 현재 돌아가고 있는 클러스터가 있다면 
 
 <br>
 
-2. Demo : GLM
+## 2. Demo : GLM
 -------------
 
 아래와 같은 작업 실습  
@@ -96,7 +96,7 @@ summary(pred)
 
 <br>
 
-3. Data Manipulation in R
+## 3. Data Manipulation in R
 -------------
 
 ### 3.1 Importing & uploading Files
@@ -235,7 +235,7 @@ h2o.removeAll()                      # cluster에 있는 모든 데이터 제거
 
 <br>
 
-4. Running Models
+## 4. Running Models
 -------------
 
 ### 4.1 Gradient Boosting Machine (GBM)
