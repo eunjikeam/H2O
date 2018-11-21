@@ -1,25 +1,12 @@
----
-title: "Machine Learning with R and H2O"
-author: 'AgileSoDA 선임연구원 김은지'
-output:
-  html_document:
-    fig_caption: yes
-    fig_height: 6
-    fig_retina: 2
-    fig_width: 6
-    theme: readable
-    toc: yes
-    toc_depth: 2
-editor_options: 
-  chunk_output_type: console
----
+Machine Learning with R and H2O
+=============
 
 <br>
 
 1. h2o Setting, 환경 확인
 ----------
 
-```{r}
+```
 library(h2o)
 
 # H2O 클라우드 만들기
@@ -40,7 +27,7 @@ h2o.removeAll()          # 현재 돌아가고 있는 클러스터가 있다면 
     * View data  
     * Create testing and training sets using sampling  
 
-```{r}
+```
 airlinesURL = "https://s3.amazonaws.com/h2o-airlines-unpacked/allyears2k.csv"
 # file 불러오기
 airlines.hex = h2o.importFile(path = airlinesURL, destination_frame = "airlines.hex")
@@ -118,7 +105,7 @@ summary(pred)
     * `path` : data 경로  
     * `destination_frame` : R에서 사용될 데이터 이름  
     
-```{r}
+```
 irisPath <- system.file("extdata", "iris.csv", package = "h2o")  # irisfile의 경로 지정
 iris.hex <- h2o.importFile(path = irisPath, destination_frame = "iris.hex") # 데이터 불러오기
 summary(iris.hex)
@@ -133,7 +120,7 @@ H2O cluster에 파일 업로드
     * `path` : 내보낼 파일 경로  
     * `destination_frame` : 내보낼 파일이름.확장자  
 
-```{r}
+```
 irisPath <- system.file("extdata", "iris.csv", package = "h2o")  # irisfile의 경로 지정
 iris.hex <- h2o.uploadFile(path = irisPath, destination_frame = "iris.hex") # 데이터 업로드
 ```
@@ -150,7 +137,7 @@ iris.hex <- h2o.uploadFile(path = irisPath, destination_frame = "iris.hex") # �
 `as.factor` function : as.factor(vector)  
     * 벡터인 변수를 factor형으로 바꾸는 함수  
     
-```{r}
+```
 irisPath <- system.file("extdata", "iris_wheader.csv", package = "h2o")
 iris.hex <- h2o.importFile(path = irisPath)
 h2o.anyFactor(iris.hex)              # 데이터 안에 factor형 변수가 있는지 확인
@@ -172,7 +159,7 @@ summary(prostate.hex[,4])            # 변수가 factor가 되어서 factor별�
 Data Frame을 가공하거나 변환하기  
 `as.h2o` function : as.h2o(data, destination_frame = name.hex)  
     * `destination_frame` : h2o에 맞는 데이터 프레임 hex로 만든다.  
-```{r}  
+``` 
 prosPath <- system.file("extdata", "prostate.csv", package = "h2o")
 prostate.hex <- h2o.importFile(path = prosPath, destination_frame = "prostate.hex")
 
@@ -188,7 +175,7 @@ iris.hex <- as.h2o(iris, destination_frame = "iris.hex") # data frame을 h2o fra
 
 ### 3.4 summarizig data & table 
 
-```{r}
+```
 h2o.ls()                                    # h2o 상에 올라와 있는 objet들의 list를 출력해준다.
 
 h2o.table(prostate.hex[,c("AGE","RACE")])   # data의 변수에 따른 count를 보여줌
@@ -207,7 +194,7 @@ h2o.table(prostate.hex[,c("AGE","RACE")])   # data의 변수에 따른 count를 
     * `data` : 쪼갤 data 입력  
     * `ratios` : 얼만큼의 비율로 쪼갤건지 설정. 벡터를 이용해 여러개로 쪼갤 수 도 있음  
 
-```{r}
+```
 ### 1. h2o.runif()를 이용한 training set, test set 만들기
 s <- h2o.runif(prostate.hex)          # prostate 데이터에서 uniform 분포의 random 변수 생성.
 summary(s)
@@ -233,7 +220,7 @@ prostate.test <- prostate.split[[2]]                           # test set
 `h2o.getFrame()` : h2o cluster에 있는 data frame 불러오기  
 `h2o.getModel()` : h2o cluster에 있는 Model 불러오기  
 
-```{r}
+```
 # prostate.hex <- h2o.getFrame(id = "prostate.hex_sid_85ce_21") # h2o cluster에서 데이터 불러오기
 # prostate.hex
 
@@ -268,7 +255,7 @@ GBM은 앙상블 러닝에서 모형을 향상시켜주는데 사용된다.
 
 Model detail, training data의 MSE, Scoring History, 등을 알 수 있다.  
  
-```{r}
+```
 data(iris)
 iris.hex <- as.h2o(iris, destination_frame = "iris.hex")
 
@@ -309,7 +296,7 @@ H2O에서는 일반화하는 과정을 elastic net penalty를 사용한다.
     
 결과창으로는 MSE, AUC(과적합 판단), R^2(결정계수), Confusion Matrix 등을 보여준다.  
 
-```{r}
+```
 prostate.hex <- h2o.importFile(path = "https://raw.github.com/h2oai/h2o/master/smalldata/logreg/prostate.csv",
                                destination_frame = "prostate.hex")
 
@@ -331,7 +318,7 @@ prostate.glm@model$cross_validation_metrics
 
 Centroid Statistics 가 출력된다.   
 
-```{r}
+```
 h2o.kmeans(training_frame = iris.hex, k = 3, x = 1:4)
 ```
 
@@ -345,7 +332,7 @@ h2o에서는 주성분분석도 지원해준다.
     * `transform` : training data를 어떻게 변환할건지 정의.  
     * `k` : PCA 주성분의 숫자 지정  
   
-```{r}
+```
 ausPath <- system.file("extdata", "australia.csv", package = "h2o")
 australia.hex <- h2o.importFile(path = ausPath)
 australia.pca <- h2o.prcomp(training_frame = australia.hex, transform = "STANDARDIZE", k = 3)
@@ -362,7 +349,7 @@ australia.pca
     * AUC Curve : 민감도와 관련된 Curve로 값이 클 수록 적합하다고 할 수 있음  
     * PCA Score : 주성분분석을 했을 때 나오는 값으로 보통 0.85 까지 오면 주성분의 개수를 멈춤.  
     
-```{r}
+```
 prostate.fit <- h2o.predict(object = prostate.glm, newdata = prostate.hex)
 prostate.fit
 ```
